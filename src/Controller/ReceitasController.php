@@ -39,31 +39,29 @@ class ReceitasController extends AbstractController
         
         $dadoEmJson = json_decode($corpoRequisicao);
 
-        //$this->dadoEmJson = $dadoEmJson;
-
-        //var_dump($this->dadoEmJson);
-        //exit();
-        
-
         $testevalida = new ValidacaoReceitas($this->entityManager);
         $testevalida->validaReceita($dadoEmJson);
-        exit(); 
-        //$mesano = substr($dadoEmJson->data, 3, 8);
         
-        
-        $receita = new Receitas();
-        $receita->setDescricao($dadoEmJson->descricao);
-        $receita->setValor($dadoEmJson->valor);
-        $receita->setData($dadoEmJson->data);
-        //$receita->setMesano($mesano); nao funcionou inserir isto pelo get... apaguei esta coluna
-        
-        
-        $this->entityManager->persist($receita);
-        //enviando alteracoes para o banco
-        $this->entityManager->flush();
+        if($testevalida->getResult()){
+            $receita = new Receitas();
+            $receita->setDescricao($dadoEmJson->descricao);
+            $receita->setValor($dadoEmJson->valor);
+            $receita->setData($dadoEmJson->data);
+            //$receita->setMesano($mesano); nao funcionou inserir isto pelo get... apaguei esta coluna
+            
+            
+            $this->entityManager->persist($receita);
+            //enviando alteracoes para o banco
+            $this->entityManager->flush();
+    
+            //agora retorna novamente no formato json para testar
+            return new JsonResponse($receita);
 
-        //agora retorna novamente no formato json para testar
-        return new JsonResponse($receita);
+        }else{
+            echo "Ja tem esta descricao de despesa inserida neste mes";
+        }
+         
+        
     }
 
     

@@ -43,19 +43,18 @@ class DespesasController extends AbstractController
         //exit();
         
 
-        $receita = new Receitas();
-        $receita->setDescricao($dadoEmJson->descricao);
-        $receita->setValor($dadoEmJson->valor);
-        $receita->setData($dadoEmJson->data);
-        //$receita->setMesano($mesano); nao funcionou inserir isto pelo get... apaguei esta coluna
+        $despesa = new Despesas();
+        $despesa->setDescricao($dadoEmJson->descricao);
+        $despesa->setValor($dadoEmJson->valor);
+        $despesa->setData($dadoEmJson->data);
+                
         
-        
-        $this->entityManager->persist($receita);
+        $this->entityManager->persist($despesa);
         //enviando alteracoes para o banco
         $this->entityManager->flush();
 
         //agora retorna novamente no formato json para testar
-        return new JsonResponse($receita);
+        return new JsonResponse($despesa);
     }
 
     
@@ -66,11 +65,11 @@ class DespesasController extends AbstractController
     public function buscarTodos(): Response
     {        
         //"cria o repositorio"
-        $repositorioDeReceitas = $this->entityManager->getRepository(Receitas::class);
+        $repositorioDeDespesas = $this->entityManager->getRepository(Despesas::class);
         //no repositorio busca todos dados
-        $listaReceitas = $repositorioDeReceitas->findAll();
+        $listaDespesas = $repositorioDeDespesas->findAll();
 
-        return new JsonResponse($listaReceitas);
+        return new JsonResponse($listaDespesas);
     }
 
     //metodo para buscar somente informacoes de um medico atraves do id fornecido na url
@@ -82,11 +81,11 @@ class DespesasController extends AbstractController
     public function buscarUm(int $id): Response
     {
                
-        $receita = $this->buscaReceita($id);
+        $despesa= $this->buscaDespesa($id);
         
-        $codigoRetorno = is_null($receita) ? Response::HTTP_NO_CONTENT : 200;
+        $codigoRetorno = is_null($despesa) ? Response::HTTP_NO_CONTENT : 200;
 
-        return new JsonResponse($receita, $codigoRetorno);
+        return new JsonResponse($despesa, $codigoRetorno);
     }
 
     /**
@@ -95,49 +94,60 @@ class DespesasController extends AbstractController
      */
     public function atualiza(int $id, Request $request): Response
     {
-        //$id = $request->get('id'); colocou como argumento ai nao precisou mais pegar assim
-
-        //vai receber os dados enviados para atualizacao, do corpo da requisição 
         $corpoRequisicao = $request->getContent();
        
-        $receitaEnviada = $this->medicoFactory->criarMedico($corpoRequisicao);
-
-        //vai achar este medico ja existente no repositorio
+        $dadoEmJson = json_decode($corpoRequisicao);
         
-        $receitaExistente = $this->buscaReceita($id);
-        if (is_null($receitaExistente)) {
+        
+        //o teste de validaacao para atualizacao deve ser um pouco diferente...pois se for o mesmo id ele deve permitir que 
+        //a o tipo de despesa seja o mesmo que ja tem no banco naquele mes pois as x vai manter a despesa mas atualizar o valor..
+        /*$testevalida = new ValidacaoDespesas($this->entityManager);
+        $testevalida->validaReceita($dadoEmJson);
+        exit(); */
+               
+        
+        $despesaEnviada = new Despesas();
+        $despesaEnviada->setDescricao($dadoEmJson->descricao);
+        $despesaEnviada->setValor($dadoEmJson->valor);
+        $despesaEnviada->setData($dadoEmJson->data);
+
+        
+        $despesaExistente = $this->buscaDespesa($id);
+        if (is_null($despesaExistente)) {
             return new Response('', Response::HTTP_NOT_FOUND);
         }
 
         //vai atribuir os valores digitados para atualizacao para este medico
-        $receitaExistente->setDescricao($receitaEnviada->getDescricao())
-        ->setValor($receitaEnviada->getValor())
-        ->setData($receitaEnviada->getData());
+        $despesaExistente->setDescricao($despesaEnviada->getDescricao())
+        ->setValor($despesaEnviada->getValor())
+        ->setData($despesaEnviada->getData());
 
         //neste caso nao precisa dar o persist pois a entidade medicoExistente já esta sendo observada pelo doctrine
         //pois foi buscada pelo doctrine...entao para enviar a atualizacao pro banco de dados basta usar o flush() direto
         $this->entityManager->flush();
 
+        return new JsonResponse($despesaEnviada);
+
     }
 
     /**
      * 
-     *@Route("/receitas/{id}", methods={"DELETE"})
+     *@Route("/despesas/{id}", methods={"DELETE"})
      */
     public function remove(int $id): Response
     {
-        $receita = $this->buscaReceita($id);
-        $this->entityManager->remove($receita);
+        $despesa = $this->buscaDespesa($id);
+        $this->entityManager->remove($despesa);
         $this->entityManager->flush();
         
          // retorna vazio e que nao foi encontrado...pois apos executar tera sido deletado
         return new Response('', Response::HTTP_NO_CONTENT);
     }
 
-    public function buscaReceita(int $id)
+    public function buscaDespesa(int $id)
     {
-        $repositorioDeReceitas = $this->entityManager->getRepository(Receitas::class);
-        $receita = $repositorioDeReceitas->find($id);
-        return $receita;
+        $repositorioDeDespesas = $this->entityManager->getRepository(Despesas::class);
+        $despesa = $repositorioDeDespesas->find($id);
+        return $despesa;
     }
 }

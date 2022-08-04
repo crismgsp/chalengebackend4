@@ -106,9 +106,27 @@ class ReceitasController extends AbstractController
         //$id = $request->get('id'); colocou como argumento ai nao precisou mais pegar assim
 
         //vai receber os dados enviados para atualizacao, do corpo da requisição 
+               
         $corpoRequisicao = $request->getContent();
        
-        $receitaEnviada = $this->medicoFactory->criarMedico($corpoRequisicao);
+        $dadoEmJson = json_decode($corpoRequisicao);
+
+        //$this->dadoEmJson = $dadoEmJson;
+
+        //var_dump($this->dadoEmJson);
+        //exit();
+        
+        //o teste de validaacao para atualizacao deve ser um pouco diferente...pois se for o mesmo id ele deve permitir que 
+        //a o tipo de despesa seja o mesmo que ja tem no banco naquele mes pois as x vai manter a despesa mas atualizar o valor..
+        /*$testevalida = new ValidacaoReceitas($this->entityManager);
+        $testevalida->validaReceita($dadoEmJson);
+        exit(); */
+               
+        
+        $receitaEnviada = new Receitas();
+        $receitaEnviada->setDescricao($dadoEmJson->descricao);
+        $receitaEnviada->setValor($dadoEmJson->valor);
+        $receitaEnviada->setData($dadoEmJson->data);
 
         //vai achar este medico ja existente no repositorio
         
@@ -125,6 +143,8 @@ class ReceitasController extends AbstractController
         //neste caso nao precisa dar o persist pois a entidade medicoExistente já esta sendo observada pelo doctrine
         //pois foi buscada pelo doctrine...entao para enviar a atualizacao pro banco de dados basta usar o flush() direto
         $this->entityManager->flush();
+
+        return new JsonResponse($receitaEnviada);
 
     }
 

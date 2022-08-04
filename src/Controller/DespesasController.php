@@ -2,19 +2,17 @@
 
 namespace App\Controller;
 
-use App\Entity\Receitas;
+use App\Entity\Despesas;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Models\ValidacaoReceitas;
 
 
 
-
-class ReceitasController extends AbstractController
+class DespesasController extends AbstractController
 {
     /**
      * @var EntityManagerInterface
@@ -29,7 +27,7 @@ class ReceitasController extends AbstractController
     }
   
     /**
-     * @Route("/receitas", methods={"POST"})
+     * @Route("/despesas", methods={"POST"})
      */
     public function novo(Request $request): Response
     {
@@ -45,12 +43,6 @@ class ReceitasController extends AbstractController
         //exit();
         
 
-        $testevalida = new ValidacaoReceitas($this->entityManager);
-        $testevalida->validaReceita($dadoEmJson);
-        exit(); 
-        //$mesano = substr($dadoEmJson->data, 3, 8);
-        
-        
         $receita = new Receitas();
         $receita->setDescricao($dadoEmJson->descricao);
         $receita->setValor($dadoEmJson->valor);
@@ -68,7 +60,7 @@ class ReceitasController extends AbstractController
 
     
     /**
-     * @Route("/receitas", methods={"GET"})
+     * @Route("/despesas", methods={"GET"})
      *
      */
     public function buscarTodos(): Response
@@ -85,7 +77,7 @@ class ReceitasController extends AbstractController
 
     /**
      * 
-     *@Route("/receitas/{id}", methods={"GET"})
+     *@Route("/despesas/{id}", methods={"GET"})
      */
     public function buscarUm(int $id): Response
     {
@@ -99,7 +91,7 @@ class ReceitasController extends AbstractController
 
     /**
      * 
-     *@Route("/receitas/{id}", methods={"PUT"})
+     *@Route("/despesas/{id}", methods={"PUT"})
      */
     public function atualiza(int $id, Request $request): Response
     {

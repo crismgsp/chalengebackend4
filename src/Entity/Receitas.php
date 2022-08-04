@@ -27,6 +27,8 @@ class Receitas implements \JsonSerializable
      * @ORM\Column(type="string")
      */
     private $data;
+   
+
 
 
     public function getId(): ?int
@@ -73,6 +75,8 @@ class Receitas implements \JsonSerializable
         return $this;
     }
 
+  
+
     //eu nao tinha colocado isso e o get nao tava funcionando... 
     public function jsonSerialize()
     {
@@ -80,7 +84,8 @@ class Receitas implements \JsonSerializable
             'id' => $this->getId(),
             'descricao' => $this->getDescricao(),
             'valor' => $this->getValor(),
-            'data' => $this->getData()
+            'data' => $this->getData(),
+            
         ];
 
     }

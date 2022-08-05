@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Receitas;
+use App\Models\ValidacaoAtualizacao;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -109,41 +110,43 @@ class ReceitasController extends AbstractController
        
         $dadoEmJson = json_decode($corpoRequisicao);
 
-        //$this->dadoEmJson = $dadoEmJson;
-
-        //var_dump($this->dadoEmJson);
-        //exit();
         
-        //o teste de validaacao para atualizacao deve ser um pouco diferente...pois se for o mesmo id ele deve permitir que 
-        //a o tipo de despesa seja o mesmo que ja tem no banco naquele mes pois as x vai manter a despesa mas atualizar o valor..
-        /*$testevalida = new ValidacaoReceitas($this->entityManager);
-        $testevalida->validaReceita($dadoEmJson);
-        exit(); */
+        $testevalida = new ValidacaoAtualizacao($this->entityManager);
+        $testevalida->validaAtualizacaoR($dadoEmJson);
+      
+        
+        if($testevalida->getResult()){
+            $receitaEnviada = new Receitas();
+            $receitaEnviada->setDescricao($dadoEmJson->descricao);
+            $receitaEnviada->setValor($dadoEmJson->valor);
+            $receitaEnviada->setData($dadoEmJson->data);
+    
+            //vai achar este medico ja existente no repositorio
+            
+            $receitaExistente = $this->buscaReceita($id);
+            if (is_null($receitaExistente)) {
+                return new Response('', Response::HTTP_NOT_FOUND);
+            }
+    
+            //vai atribuir os valores digitados para atualizacao para este medico
+            $receitaExistente->setDescricao($receitaEnviada->getDescricao())
+            ->setValor($receitaEnviada->getValor())
+            ->setData($receitaEnviada->getData());
+    
+            //neste caso nao precisa dar o persist pois a entidade medicoExistente já esta sendo observada pelo doctrine
+            //pois foi buscada pelo doctrine...entao para enviar a atualizacao pro banco de dados basta usar o flush() direto
+            $this->entityManager->flush();
+    
+            return new JsonResponse($receitaEnviada);
+    
+
+        }else{
+
+        }     
+        
                
         
-        $receitaEnviada = new Receitas();
-        $receitaEnviada->setDescricao($dadoEmJson->descricao);
-        $receitaEnviada->setValor($dadoEmJson->valor);
-        $receitaEnviada->setData($dadoEmJson->data);
-
-        //vai achar este medico ja existente no repositorio
         
-        $receitaExistente = $this->buscaReceita($id);
-        if (is_null($receitaExistente)) {
-            return new Response('', Response::HTTP_NOT_FOUND);
-        }
-
-        //vai atribuir os valores digitados para atualizacao para este medico
-        $receitaExistente->setDescricao($receitaEnviada->getDescricao())
-        ->setValor($receitaEnviada->getValor())
-        ->setData($receitaEnviada->getData());
-
-        //neste caso nao precisa dar o persist pois a entidade medicoExistente já esta sendo observada pelo doctrine
-        //pois foi buscada pelo doctrine...entao para enviar a atualizacao pro banco de dados basta usar o flush() direto
-        $this->entityManager->flush();
-
-        return new JsonResponse($receitaEnviada);
-
     }
 
     /**

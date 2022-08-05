@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Despesas;
+use App\Models\ValidacaoAtualizacao;
+use App\Models\ValidacaoDespesas;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,24 +39,27 @@ class DespesasController extends AbstractController
         
         $dadoEmJson = json_decode($corpoRequisicao);
 
-        //$this->dadoEmJson = $dadoEmJson;
-
-        //var_dump($this->dadoEmJson);
-        //exit();
+        $testevalida = new ValidacaoDespesas($this->entityManager);
+        $testevalida->validaDespesa($dadoEmJson);
         
+        if($testevalida->getResult()){
+            $despesa = new Despesas();
+            $despesa->setDescricao($dadoEmJson->descricao);
+            $despesa->setValor($dadoEmJson->valor);
+            $despesa->setData($dadoEmJson->data);
+                    
+            
+            $this->entityManager->persist($despesa);
+            //enviando alteracoes para o banco
+            $this->entityManager->flush();
+    
+            //agora retorna novamente no formato json para testar
+            return new JsonResponse($despesa);
 
-        $despesa = new Despesas();
-        $despesa->setDescricao($dadoEmJson->descricao);
-        $despesa->setValor($dadoEmJson->valor);
-        $despesa->setData($dadoEmJson->data);
-                
-        
-        $this->entityManager->persist($despesa);
-        //enviando alteracoes para o banco
-        $this->entityManager->flush();
-
-        //agora retorna novamente no formato json para testar
-        return new JsonResponse($despesa);
+        }else{
+            "Ja tem esta descricao de despesa inserida neste mes";
+        }    
+      
     }
 
     
@@ -99,35 +104,40 @@ class DespesasController extends AbstractController
         $dadoEmJson = json_decode($corpoRequisicao);
         
         
-        //o teste de validaacao para atualizacao deve ser um pouco diferente...pois se for o mesmo id ele deve permitir que 
-        //a o tipo de despesa seja o mesmo que ja tem no banco naquele mes pois as x vai manter a despesa mas atualizar o valor..
-        /*$testevalida = new ValidacaoDespesas($this->entityManager);
-        $testevalida->validaReceita($dadoEmJson);
-        exit(); */
+        $testevalida = new ValidacaoAtualizacao($this->entityManager);
+        $testevalida->validaAtualizacaoD($dadoEmJson);
+
+        
+        
+        if($testevalida->getResult()){
+            $despesaEnviada = new Despesas();
+            $despesaEnviada->setDescricao($dadoEmJson->descricao);
+            $despesaEnviada->setValor($dadoEmJson->valor);
+            $despesaEnviada->setData($dadoEmJson->data);
+    
+            
+            $despesaExistente = $this->buscaDespesa($id);
+            if (is_null($despesaExistente)) {
+                return new Response('', Response::HTTP_NOT_FOUND);
+            }
+    
+            //vai atribuir os valores digitados para atualizacao para este medico
+            $despesaExistente->setDescricao($despesaEnviada->getDescricao())
+            ->setValor($despesaEnviada->getValor())
+            ->setData($despesaEnviada->getData());
+    
+            //neste caso nao precisa dar o persist pois a entidade medicoExistente já esta sendo observada pelo doctrine
+            //pois foi buscada pelo doctrine...entao para enviar a atualizacao pro banco de dados basta usar o flush() direto
+            $this->entityManager->flush();
+    
+            return new JsonResponse($despesaEnviada);
+    
+        }else{
+            echo "Ja tem esta descricao de despesa inserida neste mes";
+        }     
                
         
-        $despesaEnviada = new Despesas();
-        $despesaEnviada->setDescricao($dadoEmJson->descricao);
-        $despesaEnviada->setValor($dadoEmJson->valor);
-        $despesaEnviada->setData($dadoEmJson->data);
-
         
-        $despesaExistente = $this->buscaDespesa($id);
-        if (is_null($despesaExistente)) {
-            return new Response('', Response::HTTP_NOT_FOUND);
-        }
-
-        //vai atribuir os valores digitados para atualizacao para este medico
-        $despesaExistente->setDescricao($despesaEnviada->getDescricao())
-        ->setValor($despesaEnviada->getValor())
-        ->setData($despesaEnviada->getData());
-
-        //neste caso nao precisa dar o persist pois a entidade medicoExistente já esta sendo observada pelo doctrine
-        //pois foi buscada pelo doctrine...entao para enviar a atualizacao pro banco de dados basta usar o flush() direto
-        $this->entityManager->flush();
-
-        return new JsonResponse($despesaEnviada);
-
     }
 
     /**

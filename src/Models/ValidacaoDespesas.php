@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Models;
-use App\Entity\Receitas;
+use App\Entity\Despesas;
 
 
 use Doctrine\ORM\EntityManagerInterface;
 
-class ValidacaoReceitas
+class ValidacaoDespesas
 {
    
 
@@ -33,7 +33,7 @@ class ValidacaoReceitas
     }
 
     //vai receber este $dadoEmJson la no controller 
-    public function validaReceita($dadoEmJson)
+    public function validaDespesa($dadoEmJson)
     {
         
         //recebe os dados da tentativa de post e isola a data/mes e o tipo da receita
@@ -47,11 +47,11 @@ class ValidacaoReceitas
         $mesPost = substr($dataPost, 3 ,8);
 
         $dadosAPostar = $descricaoPost . $mesPost;
-        
+        //var_dump($dadosAPostar);
         
         //recebe os dados do banco de dados e isola o mes/ano para cada data e armazena estes dados num array
-        $repositorioDeReceitas = $this->entityManager->getRepository(Receitas::class);
-        $receita = $repositorioDeReceitas->findAll();
+        $repositorioDeDespesas = $this->entityManager->getRepository(Despesas::class);
+        $receita = $repositorioDeDespesas->findAll();
 
         //array que vai armazenar os dados de descricao e data concatenados
         $DescricaoDataBD = [];
@@ -70,7 +70,10 @@ class ValidacaoReceitas
            
         }
 
-        //verifica se no array ja tem a receita ou despesa inserida com a mesma descricao para o mesmo mes
+        //var_dump($DescricaoDataBD);
+        
+
+        //verifica se no array ja tem a  despesa inserida com a mesma descricao para o mesmo mes
         if(in_array($dadosAPostar, $DescricaoDataBD)){
             $this->result = false;
         }else{

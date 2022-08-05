@@ -58,7 +58,7 @@ class ReceitasController extends AbstractController
             return new JsonResponse($receita);
 
         }else{
-            echo "Ja tem esta descricao de despesa inserida neste mes";
+            echo "Ja tem esta descricao de receita inserida neste mes";
         }
          
         

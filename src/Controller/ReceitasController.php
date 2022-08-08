@@ -47,6 +47,7 @@ class ReceitasController extends AbstractController
             $receita = new Receitas();
             $receita->setDescricao($dadoEmJson->descricao);
             $receita->setValor($dadoEmJson->valor);
+            
             $receita->setData($dadoEmJson->data);
             //$receita->setMesano($mesano); nao funcionou inserir isto pelo get... apaguei esta coluna
             

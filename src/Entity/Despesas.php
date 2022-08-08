@@ -27,6 +27,10 @@ class Despesas implements \JsonSerializable
      * @ORM\Column(type="string")
      */
     private $data;
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $categoria;
    
 
 
@@ -61,6 +65,18 @@ class Despesas implements \JsonSerializable
         return $this;
     }
 
+    public function getCategoria(): ?string
+    {
+        return $this->categoria;
+    }
+
+
+    public function setCategoria(string $categoria): self
+    {
+        $this->categoria = $categoria;
+        return $this;
+    }
+
 
     public function getData()
     {
@@ -84,6 +100,7 @@ class Despesas implements \JsonSerializable
             'id' => $this->getId(),
             'descricao' => $this->getDescricao(),
             'valor' => $this->getValor(),
+            'categoria' => $this->getCategoria(),
             'data' => $this->getData(),
             
         ];

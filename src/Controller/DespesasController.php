@@ -46,6 +46,14 @@ class DespesasController extends AbstractController
             $despesa = new Despesas();
             $despesa->setDescricao($dadoEmJson->descricao);
             $despesa->setValor($dadoEmJson->valor);
+
+            $categoria = ['alimentação', 'saúde', 'moradia', 'transporte', 'educação', 'lazer', 'imprevistos'];
+            if(in_array($dadoEmJson->categoria, $categoria)){
+                $despesa->setCategoria($dadoEmJson->categoria);
+            }else{
+                $despesa->setCategoria('outras');
+            }
+            
             $despesa->setData($dadoEmJson->data);
                     
             

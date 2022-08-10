@@ -73,34 +73,8 @@ class ResumoMes
             ->groupBy('q.categoria')
             ->getQuery()->getResult();
 
-        echo 'query';    
-        var_dump($query);
-        exit();    
-
-
-        $valoresCategorias = [];
-
-        foreach($despesa as $categoria){
+        $valoresDespesas = [];
             
-
-            $categorias = $categoria->getCategoria("categoria");
-            
-            $valor = $categoria->getValor("valor");
-
-            $categoriaValor = $categorias."-".$valor;
-                       
-            array_push($valoresCategorias, $categoriaValor);
-           
-           
-        } 
-
-        var_dump($valoresCategorias);
-        exit();
-
-        
-        $somaValoresDespesa = array_sum($valoresCategorias);
-
-        
         foreach($despesa as $despesa1){
             $descricao = $despesa1->getDescricao("descricao");
             
@@ -111,6 +85,8 @@ class ResumoMes
            
         } 
 
+        $somaValoresDespesa = array_sum($valoresDespesas);
+
         $saldofinal = ($somaValoresReceita - $somaValoresDespesa);
 
        
@@ -120,6 +96,22 @@ class ResumoMes
         echo PHP_EOL;
         echo "O saldo final do mês é " . $saldofinal;
         echo PHP_EOL;
+        echo "Valor total de despesas por categoria neste mês:";
+        echo PHP_EOL;
+
+       //var_dump($query);
+       //exit();
+
+        foreach($query as $categoria){
+            
+            $categorias = $categoria["categoria"];
+            
+            $valor = $categoria[1];
+
+            echo "Categoria  $categorias   -> Valor:  $valor";
+            echo PHP_EOL;
+          
+        } 
 
     }
 

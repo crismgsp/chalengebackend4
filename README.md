@@ -1,14 +1,14 @@
 <h1 align="center"><strong>Challenge Backend4 Alura -> </strong></h1><br>
 
 <strong>Resumo do que foi proposto para este Chalenge:</strong><br>
-<p style: "color: red">Semana 1  </p><br>
+<p style="color: red";>Semana 1  </p>
 Implementar uma API REST: implementar nela o CRUD de receitas e de despesas, seguindo algumas validações e regras de negócio,
 implementar rotas para que sejam feitas requisicções HTTP<br>
 
-Semana 2 <br>
+<p style="color: red";>Semana 2 </p>
 Realizar ajustes na API: para permitir a categorização de despesas, além de implementar novas funcionalidades, como a busca de receitas e despesas pela descrição. Tambem é para fazer testes automatizados. <br>
 
-Semanas 3 e 4 <br>
+<p style="color: red";>Semanas 3 e 4 </p>
 
 Vamos adicionar segurança na API: com a implementação de um mecanismo de autenticação, além de também realizar o deploy dela em algum provedor Cloud, como o Heroku.
 
@@ -41,13 +41,13 @@ Categoria  outras   -> Valor: 30<br>
 
 
 <p align="center"><strong>Ferramentas e linguagens utilizadas até agora:</strong></p>
-<p><img src='app/sistema/assets/imagens/php.png' alt="simbolo PHP criado por Freepik - Flaticon"/> PHP </p>
+<p><img src='src/assets/imagens/php.png' alt="simbolo PHP criado por Freepik - Flaticon"/> PHP </p>
 
-<p><img src='app/sistema/assets/imagens/mariadb.png'alt="simbolo MariaDB"/> Banco de dados MariaDB </p>
-<p><img src='app/sistema/assets/imagens/phpmyadmin.png' alt=" Imagem relacionada a PHPMyAdmin"/>PHPMyAdmin (pra acessar o MariaDB)  </p>
-<p><img src='app/sistema/assets/imagens/vscode.png' alt="simbolo VSCODE"/> Visual Studio Code </p>
-<p><img src='app/sistema/assets/imagens/xampp.png' alt="simbolo XAMPP"/> XAMPP <br> </p>
-<p><img src='app/sistema/assets/imagens/composer.png' alt="simbolo XAMPP"/> Composer <br> </p>
+<p><img src='src/assets/imagens/mariadb.png'alt="simbolo MariaDB"/> Banco de dados MariaDB </p>
+<p><img src='src/assets/imagens/phpmyadmin.png' alt=" Imagem relacionada a PHPMyAdmin"/>PHPMyAdmin (pra acessar o MariaDB)  </p>
+<p><img src='src/assets/imagens/vscode.png' alt="simbolo VSCODE"/> Visual Studio Code </p>
+<p><img src='src/assets/imagens/xampp.png' alt="simbolo XAMPP"/> XAMPP <br> </p>
+<p><img src='src/assets/imagens/composer.png' alt="simbolo XAMPP"/> Composer <br> </p>
 Symfony
 Doctrine
 

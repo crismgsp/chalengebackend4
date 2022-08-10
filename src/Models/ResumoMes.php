@@ -42,30 +42,54 @@ class ResumoMes
         $repositorioDeReceitas = $this->entityManager->getRepository(Receitas::class);
         $receita = $repositorioDeReceitas->findBy(['mesano' => $mesano]);
 
-        var_dump($despesa);
-        var_dump($receita);
-        exit();
+        //var_dump($despesa);
+        //var_dump($receita);
+        //exit();
 
-        //array que vai armazenar os dados de descricao e data concatenados
-        /*$DescricaoDataBD = [];
+        $valoresReceita = [];
 
         foreach($receita as $receita1){
             $descricao = $receita1->getDescricao("descricao");
             
-            $data = $receita1->getData("data");
+            //$data = $receita1->getData("data");
             
-            $dataMes = substr($data, 3, 8);
+            //$dataMes = substr($data, 3, 8);
 
-           
-            $dadosBD = $descricao . $dataMes;
+            $valor = $receita1->getValor("valor");
 
-            array_push($DescricaoDataBD, $dadosBD);
-           
-        } */
+            array_push($valoresReceita, $valor ); 
+   
+        } 
 
-       
-       
+        $somaValoresReceita = array_sum($valoresReceita);
         
+       
+       
+        $valoresDespesas = [];
+
+        foreach($despesa as $despesa1){
+            $descricao = $despesa1->getDescricao("descricao");
+            
+            $valor = $despesa1->getValor("valor");
+                       
+            array_push($valoresDespesas, $valor);
+           
+           
+        } 
+        $somaValoresDespesa = array_sum($valoresDespesas);
+
+        
+
+        $saldofinal = ($somaValoresReceita - $somaValoresDespesa);
+
+       
+        echo "O valor total das receitas do mês é " . $somaValoresReceita;
+        echo PHP_EOL;
+        echo "O valor total das despesas do mês é " . $somaValoresDespesa;
+        echo PHP_EOL;
+        echo "O saldo final do mês é " . $saldofinal;
+        echo PHP_EOL;
+
     }
 
 }    

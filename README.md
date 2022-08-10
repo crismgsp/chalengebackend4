@@ -3,7 +3,7 @@
 <strong>Resumo do que foi proposto para este Chalenge:</strong><br>
 <p style="color: red";>Semana 1  </p>
 Implementar uma API REST: implementar nela o CRUD de receitas e de despesas, seguindo algumas validações e regras de negócio,
-implementar rotas para que sejam feitas requisicções HTTP<br>
+implementar rotas para que sejam feitas requisicções HTTP, usar o Postman para testar estas requisições<br>
 
 <p style="color: red";>Semana 2 </p>
 Realizar ajustes na API: para permitir a categorização de despesas, além de implementar novas funcionalidades, como a busca de receitas e despesas pela descrição. Tambem é para fazer testes automatizados. <br>
@@ -18,13 +18,63 @@ Vamos adicionar segurança na API: com a implementação de um mecanismo de aute
 as despesas<br>
 
 Projeto criado usando o framework Symfony, e o gerenciador Doctrine para fazer o mapeamento objetos para o banco de dados, facilitando a conexão e consultas com o banco. Implementei algumas rotas, e em cada uma delas está definida qual requisição pode ser feita. <br>
-<strong>As rotas pedidas/implementadas até o momento são:<strong> <br>
+<strong>As rotas pedidas/implementadas até o momento são:</strong> <br>
 
+<strong>Receitas</strong>: <br>
+@Route("/receitas", methods={"POST"}, ficou assim localmente no meu computador:<br>
+ http://localhost/controlefinanceiro/public/index.php/receitas <br>
+ Esta rota é para o usuário inserir uma receita, usando o método POST <br>
+ <br>
+ 
+ @Route("/receitas", methods={"GET"}), ficou assim localmente no meu computador:<br>
+http://localhost/controlefinanceiro/public/index.php/receitas <br>
+Esta rota é para o usuário buscar informações de todas receitas, usando o método GET<br>
+
+@Route("/receitas/{id}", methods={"GET"}), ficou assim localmente no meu computador:<br>
+http://localhost/controlefinanceiro/public/index.php/receitas/id <br>
+Esta rota é para o usuário buscar informações de uma receita, passando o seu id e usando o método GET<br>
+
+@Route("/receitas/descricao/{descricao}", methods={"GET"}), ficou assim localmente no meu computador,vou deixar um exemplo:<br>
+http://localhost/controlefinanceiro/public/index.php/receitas/descricao/salario <br>
+Nesta rota o usuario pode buscar todas as receitas de acordo com uma descrição passada na url, e usando o GET<br>
+
+@Route("/receitas/mes/{mesano}", methods={"GET"}), ficou assim localmente no meu computador:<br>
+http://localhost/controlefinanceiro/public/index.php/receitas/mes/mm-yyyy <br>
+Nesta rota o usuario pode buscar todas as receitas de um mesmo mes(no mesmo ano), e usando o GET<br>
+
+<br>
+
+<strong>Despesas</strong>: <br>
+@Route("/despesas", methods={"POST"}, ficou assim localmente no meu computador:<br>
+ http://localhost/controlefinanceiro/public/index.php/despesas <br>
+ Esta rota é para o usuário inserir uma despesa, usando o método POST <br>
+ <br>
+ 
+ @Route("/despesas", methods={"GET"}), ficou assim localmente no meu computador:<br>
+http://localhost/controlefinanceiro/public/index.php/despesas <br>
+Esta rota é para o usuário buscar informações de todas despesas, usando o método GET<br>
+
+@Route("/despesas/{id}", methods={"GET"}), ficou assim localmente no meu computador, vou deixar um exemplo:<br>
+http://localhost/controlefinanceiro/public/index.php/despesas/1 <br>
+Esta rota é para o usuário buscar informações de uma despesa, passando o seu id e usando o método GET<br>
+
+@Route("/despesas/descricao/{descricao}", methods={"GET"}), ficou assim localmente no meu computador,vou deixar um exemplo:<br>
+http://localhost/controlefinanceiro/public/index.php/despesas/descricao/supermercado <br>
+Nesta rota o usuario pode buscar todas as despesas de acordo com uma descrição passada na url, e usando o GET<br>
+
+@Route("/despesas/mes/{mesano}", methods={"GET"}), ficou assim localmente no meu computador:<br>
+http://localhost/controlefinanceiro/public/index.php/despesas/mes/mm-yyyy <br>
+Nesta rota o usuario pode buscar todas as despesas de um mesmo mes(no mesmo ano), e usando o GET<br>
+
+
+<br>
 
 
 <strong>Resumo mensal</strong>: <br>
-@Route("/resumo/{mesano}", methods={"GET"}, ficou assim localmente no meu computador: http://localhost/controlefinanceiro/public/index.php/resumo/mm-yyyy  onde mm -> mês com 2 dígitos e yyyy é ano com 2 dígitos <br>
-ao acessar rota de resumo mensal, utilizando o GET, obtem-se um resultado assim, por exemplo:<br>
+@Route("/resumo/{mesano}", methods={"GET"}, ficou assim localmente no meu computador:<br>
+ http://localhost/controlefinanceiro/public/index.php/resumo/mm-yyyy <br>
+  onde mm -> mês com 2 dígitos e yyyy é ano com 2 dígitos <br>
+ao acessar esta rota de resumo mensal, utilizando o GET, obtem-se um resultado assim, por exemplo:<br>
 O valor total das receitas do mês é 2700<br>
 O saldo final do mês é 1640<br>
 Valor total de despesas por categoria neste mês:<br>
@@ -48,8 +98,11 @@ Categoria  outras   -> Valor: 30<br>
 <p><img src='src/assets/imagens/vscode.png' alt="simbolo VSCODE"/> Visual Studio Code </p>
 <p><img src='src/assets/imagens/xampp.png' alt="simbolo XAMPP"/> XAMPP <br> </p>
 <p><img src='src/assets/imagens/composer.png' alt="simbolo XAMPP"/> Composer <br> </p>
-Symfony
-Doctrine
+<p><img src='src/assets/imagens/symfony.png' alt="simbolo XAMPP"/> Symfony <br> </p>
+<p><img src='src/assets/imagens/doctrine.png' alt="simbolo XAMPP"/> Doctrine<br> </p>
+<p><img src='src/assets/imagens/postman.png' alt="simbolo XAMPP"/> Postman<br> </p>
+
+
 
 
 

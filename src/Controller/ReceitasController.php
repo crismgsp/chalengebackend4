@@ -49,8 +49,11 @@ class ReceitasController extends AbstractController
             $receita->setValor($dadoEmJson->valor);
             
             $receita->setData($dadoEmJson->data);
-            //$receita->setMesano($mesano); nao funcionou inserir isto pelo get... apaguei esta coluna
             
+            $mesano = substr($dadoEmJson->data, 3 ,8);
+
+            $receita->setMesano($mesano);
+
             
             $this->entityManager->persist($receita);
             //enviando alteracoes para o banco
@@ -81,8 +84,7 @@ class ReceitasController extends AbstractController
         return new JsonResponse($listaReceitas);
     }
 
-    //metodo para buscar somente informacoes de um medico atraves do id fornecido na url
-
+   
     /**
      * 
      *@Route("/receitas/{id}", methods={"GET"})
@@ -91,6 +93,34 @@ class ReceitasController extends AbstractController
     {
                
         $receita = $this->buscaReceita($id);
+        
+        $codigoRetorno = is_null($receita) ? Response::HTTP_NO_CONTENT : 200;
+
+        return new JsonResponse($receita, $codigoRetorno);
+    }
+
+    /**
+     * 
+     *@Route("/receitas/descricao/{descricao}", methods={"GET"})
+     */
+    public function buscarPorDescricao($descricao): Response
+    {
+               
+        $repositorioDeReceitas = $this->entityManager->getRepository(Receitas::class);
+        $receita = $repositorioDeReceitas->findBy(['descricao' => $descricao]);
+        
+        return new JsonResponse($receita);
+    }
+
+     /**
+     * 
+     *@Route("/receitas/mes/{mes}/{ano}", methods={"GET"})
+     */
+    public function buscarPorAnoMes($descricao): Response
+    {
+           
+        $repositorioDeReceitas = $this->entityManager->getRepository(Receitas::class);
+        $receita = $repositorioDeReceitas->findby($descricao);
         
         $codigoRetorno = is_null($receita) ? Response::HTTP_NO_CONTENT : 200;
 
@@ -168,6 +198,13 @@ class ReceitasController extends AbstractController
     {
         $repositorioDeReceitas = $this->entityManager->getRepository(Receitas::class);
         $receita = $repositorioDeReceitas->find($id);
+        return $receita;
+    }
+
+    public function buscaPorDescricao($descricao)
+    {
+        $repositorioDeReceitas = $this->entityManager->getRepository(Receitas::class);
+        $receita = $repositorioDeReceitas->findby($descricao);
         return $receita;
     }
 }

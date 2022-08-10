@@ -48,6 +48,7 @@ class ValidacaoReceitas
 
         $dadosAPostar = $descricaoPost . $mesPost;
         
+       
         
         //recebe os dados do banco de dados e isola o mes/ano para cada data e armazena estes dados num array
         $repositorioDeReceitas = $this->entityManager->getRepository(Receitas::class);

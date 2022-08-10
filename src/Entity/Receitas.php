@@ -27,7 +27,10 @@ class Receitas implements \JsonSerializable
      * @ORM\Column(type="string")
      */
     private $data;
-   
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $mesano;
 
 
 
@@ -76,6 +79,18 @@ class Receitas implements \JsonSerializable
     }
 
   
+    public function getMesano()
+    {
+        return $this->mesano;
+    }
+
+    //aqui vou tentar criar um jeito de retornar os valores pelo mês....depois penso nisso
+    public function setMesano($mesano): self
+    {
+        $this->mesano = $mesano;
+
+        return $this;
+    }
 
     //eu nao tinha colocado isso e o get nao tava funcionando... 
     public function jsonSerialize()
@@ -85,7 +100,8 @@ class Receitas implements \JsonSerializable
             'descricao' => $this->getDescricao(),
             'valor' => $this->getValor(),
             'data' => $this->getData(),
-            
+            //este mes ano ta la em validacaoreceitas na linha 51
+                        
         ];
 
     }

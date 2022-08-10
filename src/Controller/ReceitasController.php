@@ -55,6 +55,7 @@ class ReceitasController extends AbstractController
             $receita->setMesano($mesano);
 
             
+            
             $this->entityManager->persist($receita);
             //enviando alteracoes para o banco
             $this->entityManager->flush();
@@ -123,10 +124,7 @@ class ReceitasController extends AbstractController
         $urlexplode = explode("/", $url);
         $dataurl = $urlexplode[6];
         $mesano = str_replace("-", "/", $dataurl);
-        //var_dump($mesano);
-        //exit();
-
-        //$mesano = $mesanourl;
+        
 
         $repositorioDeReceitas = $this->entityManager->getRepository(Receitas::class);
         $receita = $repositorioDeReceitas->findBy(['mesano' => $mesano]);

@@ -32,6 +32,9 @@ class Despesas implements \JsonSerializable
      */
     private $categoria;
 
+    /**
+     * @ORM\Column(type="string")
+     */
     private $mesano;
    
 
@@ -85,7 +88,7 @@ class Despesas implements \JsonSerializable
         return $this->data;
     }
 
-    //aqui vou tentar criar um jeito de retornar os valores pelo mês....depois penso nisso
+    
     public function setData($data): self
     {
         $this->data = $data;
@@ -98,14 +101,13 @@ class Despesas implements \JsonSerializable
         return $this->mesano;
     }
 
-    //aqui vou tentar criar um jeito de retornar os valores pelo mês....depois penso nisso
+    
     public function setMesano($mesano): self
     {
         $this->mesano = $mesano;
 
         return $this;
     }
-
   
 
     //eu nao tinha colocado isso e o get nao tava funcionando... 
@@ -117,7 +119,7 @@ class Despesas implements \JsonSerializable
             'valor' => $this->getValor(),
             'categoria' => $this->getCategoria(),
             'data' => $this->getData(),
-            
+            'mesano' => $this->getMesano()
         ];
 
     }

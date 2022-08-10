@@ -100,7 +100,7 @@ class Receitas implements \JsonSerializable
             'descricao' => $this->getDescricao(),
             'valor' => $this->getValor(),
             'data' => $this->getData(),
-            //
+            
             'mesano' => $this->getMesano()           
         ];
 

@@ -107,6 +107,39 @@ class DespesasController extends AbstractController
 
     /**
      * 
+     *@Route("/despesas/descricao/{descricao}", methods={"GET"})
+     */
+    public function buscarPorDescricao($descricao): Response
+    {
+               
+        $repositorioDeDespesas = $this->entityManager->getRepository(Despesas::class);
+        $receita = $repositorioDeDespesas->findBy(['descricao' => $descricao]);
+        
+        return new JsonResponse($receita);
+    }
+
+     /**
+     * 
+     *@Route("/despesas/mes/{mesano}", methods={"GET"})
+     */
+    public function buscarPorAnoMes($mesano): Response
+    {
+        
+        $url = $_SERVER["REQUEST_URI"];
+        $urlexplode = explode("/", $url);
+        $dataurl = $urlexplode[6];
+        $mesano = str_replace("-", "/", $dataurl);
+        
+
+        $repositorioDeDespesas = $this->entityManager->getRepository(Despesas::class);
+        $receita = $repositorioDeDespesas->findBy(['mesano' => $mesano]);
+        
+        
+        return new JsonResponse($receita);
+    }
+
+    /**
+     * 
      *@Route("/despesas/{id}", methods={"PUT"})
      */
     public function atualiza(int $id, Request $request): Response

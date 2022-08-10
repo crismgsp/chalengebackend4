@@ -69,7 +69,7 @@ class ResumoMes
         $repositorioDeDespesas = $this->entityManager->getRepository(Despesas::class);
         $qb = $repositorioDeDespesas->createQueryBuilder('q');
         $query = $qb 
-            ->select('q.categoria, SUM(q.valor)')
+            ->select('q.categoria, SUM(q.valor), q.mesano')
             ->groupBy('q.categoria')
             ->getQuery()->getResult();
 
@@ -99,10 +99,30 @@ class ResumoMes
         echo "Valor total de despesas por categoria neste mês:";
         echo PHP_EOL;
 
+       //antes de fazer este foreach precisa filtrar esta query somente para os dados de despesa do mesano
+
        //var_dump($query);
        //exit();
 
-        foreach($query as $categoria){
+        $url = $_SERVER["REQUEST_URI"];
+        $urlexplode = explode("/", $url);
+        $dataurl = $urlexplode[5];
+        $mesano = str_replace("-", "/", $dataurl);
+        
+    
+        $queryMesano = [];
+
+        foreach($query as $querysemfiltro){
+            if($querysemfiltro['mesano'] === $mesano){
+                array_push($queryMesano, $querysemfiltro);
+            }
+        }
+
+        //var_dump($queryMesano);
+        //exit();
+
+
+        foreach($queryMesano as $categoria){
             
             $categorias = $categoria["categoria"];
             

@@ -64,9 +64,43 @@ class ResumoMes
         $somaValoresReceita = array_sum($valoresReceita);
         
        
-       
-        $valoresDespesas = [];
+        // tentar fazer um select agrupando por categoria...groupby 'categoria'
 
+        $repositorioDeDespesas = $this->entityManager->getRepository(Despesas::class);
+        $qb = $repositorioDeDespesas->createQueryBuilder('q');
+        $query = $qb 
+            ->select('q.categoria, SUM(q.valor)')
+            ->groupBy('q.categoria')
+            ->getQuery()->getResult();
+
+        echo 'query';    
+        var_dump($query);
+        exit();    
+
+
+        $valoresCategorias = [];
+
+        foreach($despesa as $categoria){
+            
+
+            $categorias = $categoria->getCategoria("categoria");
+            
+            $valor = $categoria->getValor("valor");
+
+            $categoriaValor = $categorias."-".$valor;
+                       
+            array_push($valoresCategorias, $categoriaValor);
+           
+           
+        } 
+
+        var_dump($valoresCategorias);
+        exit();
+
+        
+        $somaValoresDespesa = array_sum($valoresCategorias);
+
+        
         foreach($despesa as $despesa1){
             $descricao = $despesa1->getDescricao("descricao");
             
@@ -76,9 +110,6 @@ class ResumoMes
            
            
         } 
-        $somaValoresDespesa = array_sum($valoresDespesas);
-
-        
 
         $saldofinal = ($somaValoresReceita - $somaValoresDespesa);
 

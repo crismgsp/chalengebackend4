@@ -100,8 +100,8 @@ class Receitas implements \JsonSerializable
             'descricao' => $this->getDescricao(),
             'valor' => $this->getValor(),
             'data' => $this->getData(),
-            //este mes ano ta la em validacaoreceitas na linha 51
-                        
+            //
+            'mesano' => $this->getMesano()           
         ];
 
     }

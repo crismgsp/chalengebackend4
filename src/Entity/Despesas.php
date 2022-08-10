@@ -31,6 +31,8 @@ class Despesas implements \JsonSerializable
      * @ORM\Column(type="string")
      */
     private $categoria;
+
+    private $mesano;
    
 
 
@@ -87,6 +89,19 @@ class Despesas implements \JsonSerializable
     public function setData($data): self
     {
         $this->data = $data;
+
+        return $this;
+    }
+
+    public function getMesano()
+    {
+        return $this->mesano;
+    }
+
+    //aqui vou tentar criar um jeito de retornar os valores pelo mês....depois penso nisso
+    public function setMesano($mesano): self
+    {
+        $this->mesano = $mesano;
 
         return $this;
     }

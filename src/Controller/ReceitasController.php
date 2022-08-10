@@ -114,17 +114,25 @@ class ReceitasController extends AbstractController
 
      /**
      * 
-     *@Route("/receitas/mes/{mes}/{ano}", methods={"GET"})
+     *@Route("/receitas/mes/{mesano}", methods={"GET"})
      */
-    public function buscarPorAnoMes($descricao): Response
+    public function buscarPorAnoMes($mesano): Response
     {
-           
-        $repositorioDeReceitas = $this->entityManager->getRepository(Receitas::class);
-        $receita = $repositorioDeReceitas->findby($descricao);
         
-        $codigoRetorno = is_null($receita) ? Response::HTTP_NO_CONTENT : 200;
+        $url = $_SERVER["REQUEST_URI"];
+        $urlexplode = explode("/", $url);
+        $dataurl = $urlexplode[6];
+        $mesano = str_replace("-", "/", $dataurl);
+        //var_dump($mesano);
+        //exit();
 
-        return new JsonResponse($receita, $codigoRetorno);
+        //$mesano = $mesanourl;
+
+        $repositorioDeReceitas = $this->entityManager->getRepository(Receitas::class);
+        $receita = $repositorioDeReceitas->findBy(['mesano' => $mesano]);
+        
+        
+        return new JsonResponse($receita);
     }
 
     /**

@@ -55,6 +55,10 @@ class DespesasController extends AbstractController
             }
             
             $despesa->setData($dadoEmJson->data);
+
+            $mesano = substr($dadoEmJson->data, 3 ,8);
+
+            $despesa->setMesano($mesano);
                     
             
             $this->entityManager->persist($despesa);

@@ -42,18 +42,12 @@ class ResumoMes
         $repositorioDeReceitas = $this->entityManager->getRepository(Receitas::class);
         $receita = $repositorioDeReceitas->findBy(['mesano' => $mesano]);
 
-        //var_dump($despesa);
-        //var_dump($receita);
-        //exit();
-
+       
         $valoresReceita = [];
 
         foreach($receita as $receita1){
             $descricao = $receita1->getDescricao("descricao");
-            
-            //$data = $receita1->getData("data");
-            
-            //$dataMes = substr($data, 3, 8);
+      
 
             $valor = $receita1->getValor("valor");
 
@@ -99,11 +93,7 @@ class ResumoMes
         echo "Valor total de despesas por categoria neste mês:";
         echo PHP_EOL;
 
-       //antes de fazer este foreach precisa filtrar esta query somente para os dados de despesa do mesano
-
-       //var_dump($query);
-       //exit();
-
+       
         $url = $_SERVER["REQUEST_URI"];
         $urlexplode = explode("/", $url);
         $dataurl = $urlexplode[5];
@@ -118,10 +108,7 @@ class ResumoMes
             }
         }
 
-        //var_dump($queryMesano);
-        //exit();
-
-
+        
         foreach($queryMesano as $categoria){
             
             $categorias = $categoria["categoria"];

@@ -64,7 +64,8 @@ class ReceitasController extends AbstractController
             return new JsonResponse($receita);
 
         }else{
-            echo "Ja tem esta descricao de receita inserida neste mes";
+            $else = "Ja tem esta descricao de receita inserida neste mes";
+            return new JsonResponse($else);
         }
          
         
@@ -139,9 +140,7 @@ class ReceitasController extends AbstractController
      */
     public function atualiza(int $id, Request $request): Response
     {
-        //$id = $request->get('id'); colocou como argumento ai nao precisou mais pegar assim
-
-        //vai receber os dados enviados para atualizacao, do corpo da requisição 
+        
                
         $corpoRequisicao = $request->getContent();
        
@@ -158,31 +157,30 @@ class ReceitasController extends AbstractController
             $receitaEnviada->setValor($dadoEmJson->valor);
             $receitaEnviada->setData($dadoEmJson->data);
     
-            //vai achar este medico ja existente no repositorio
+            
             
             $receitaExistente = $this->buscaReceita($id);
             if (is_null($receitaExistente)) {
                 return new Response('', Response::HTTP_NOT_FOUND);
             }
     
-            //vai atribuir os valores digitados para atualizacao para este medico
+           
             $receitaExistente->setDescricao($receitaEnviada->getDescricao())
             ->setValor($receitaEnviada->getValor())
             ->setData($receitaEnviada->getData());
     
-            //neste caso nao precisa dar o persist pois a entidade medicoExistente já esta sendo observada pelo doctrine
-            //pois foi buscada pelo doctrine...entao para enviar a atualizacao pro banco de dados basta usar o flush() direto
+            
             $this->entityManager->flush();
     
             return new JsonResponse($receitaEnviada);
     
 
         }else{
-
+            $erroatualiza = "Esta atualização não foi feita";
+            return new JsonResponse($erroatualiza);
         }     
         
-               
-        
+     
         
     }
 

@@ -69,7 +69,8 @@ class DespesasController extends AbstractController
             return new JsonResponse($despesa);
 
         }else{
-            "Ja tem esta descricao de despesa inserida neste mes";
+            $jatem = "Ja tem esta descricao de despesa inserida neste mes";
+            return new JsonResponse($jatem); 
         }    
       
     }
@@ -166,21 +167,19 @@ class DespesasController extends AbstractController
                 return new Response('', Response::HTTP_NOT_FOUND);
             }
     
-            //vai atribuir os valores digitados para atualizacao para este medico
             $despesaExistente->setDescricao($despesaEnviada->getDescricao())
             ->setValor($despesaEnviada->getValor())
             ->setData($despesaEnviada->getData());
     
-            //neste caso nao precisa dar o persist pois a entidade medicoExistente já esta sendo observada pelo doctrine
-            //pois foi buscada pelo doctrine...entao para enviar a atualizacao pro banco de dados basta usar o flush() direto
+        
             $this->entityManager->flush();
     
             return new JsonResponse($despesaEnviada);
     
         }else{
-            echo "Ja tem esta descricao de despesa inserida neste mes";
-        }     
-               
+            $else = "Ja tem esta descricao de despesa inserida neste mes";
+            return new JsonResponse($else);
+        }       
         
         
     }

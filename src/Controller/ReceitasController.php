@@ -176,7 +176,7 @@ class ReceitasController extends AbstractController
     
 
         }else{
-            $erroatualiza = "Esta atualização não foi feita";
+            $erroatualiza = "Esta atualização nao foi feita";
             return new JsonResponse($erroatualiza);
         }     
         

@@ -79,18 +79,18 @@ class ValidacaoAtualizacao
                       
         }
        
-        var_dump($AtualizacaoDataBD);
+        //var_dump($AtualizacaoDataBD);
         //echo PHP_EOL;
-        var_dump($dadosAAtualizar);
+        //var_dump($dadosAAtualizar);
         
         
         //se tiver este dado de mesmo id...descricao e mes pode retornar true..pois vai poder atualizar
         //mesmmo ja tendo esta despesa neste mes...que no caso é do mesmo id....caso nao ainda passa por outra validacao...
        if(in_array($dadosAAtualizar, $AtualizacaoDataBD)){
-        echo "entrou neste if true";
+        
         $this->result = true;   
        }else{
-        echo "entrou neste else que chama o valida despesa";
+        
         $this->validaDespesa($dadoEmJson);
        }
     
@@ -186,18 +186,18 @@ class ValidacaoAtualizacao
                       
         }
        
-        var_dump($AtualizacaoDataBD);
+        //var_dump($AtualizacaoDataBD);
         //echo PHP_EOL;
-        var_dump($dadosAAtualizar);
+        //var_dump($dadosAAtualizar);
         
         
         //se tiver este dado de mesmo id...descricao e mes pode retornar true..pois vai poder atualizar
         //mesmmo ja tendo esta despesa neste mes...que no caso é do mesmo id....caso nao ainda passa por outra validacao...
        if(in_array($dadosAAtualizar, $AtualizacaoDataBD)){
-        echo "entrou neste if true";
+        
         $this->result = true;   
        }else{
-        echo "entrou neste else que chama o valida receita";
+        
         $this->validaReceita($dadoEmJson);
        }
     

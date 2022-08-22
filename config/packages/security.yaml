@@ -15,8 +15,15 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            lazy: true
-            provider: app_user_provider
+            pattern: ^\/(?!.*login).*$   #adicionei esta linha para a rota login nao ficar protegida pelo firewall
+            #pattern: ^\/(?!.*criausuario).*$   #adicionei esta linha para a rota criausuario nao ficar protegida pelo firewall
+            # anonymous: ~
+            logout: ~
+            guard:
+                authenticators:
+                    - App\Security\JwtAutenticador
+            #lazy: true
+            #provider: app_user_provider
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall

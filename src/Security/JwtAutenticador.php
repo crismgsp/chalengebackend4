@@ -39,6 +39,7 @@ class JwtAutenticador extends AbstractGuardAuthenticator
         
         $tokenapache = str_replace('Bearer ', '', apache_request_headers());
         
+        
         $tokenapache = $tokenapache['Authorization'];
        
         try{

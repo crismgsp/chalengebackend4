@@ -1,17 +1,17 @@
 <h1 align="center"><strong>Challenge Backend4 Alura :heart: </strong></h1><br>
 
 <strong>Resumo do que foi proposto para este Chalenge:</strong><br><br>
-<strong><p style="color: #ED30CF";>Semana 1  </p></strong>
+<strong><p>Semana 1  </p></strong>
 Implementar uma API REST: implementar nela o CRUD de receitas e de despesas, seguindo algumas validações e regras de negócio,
 implementar rotas para que sejam feitas requisicções HTTP, usar o Postman para testar estas requisições
 Não pode repetir a mesma descrição de despesa e receita para o mesmo mês/ano, caso o usuário tente fazer isso,
 é feita uma checagem e é devolvida uma mensagem avisando que isto não é permitido, e o post não é efetivado.
 <br><br>
 
-<strong><p style="color: #ED30CF";>Semana 2 </p></strong>
+<strong><p>Semana 2 </p></strong>
 Realizar ajustes na API: para permitir a categorização de despesas, além de implementar novas funcionalidades, como a busca de receitas e despesas pela descrição. Tambem é para fazer testes automatizados. <br><br>
 
-<strong><p style="color: #ED30CF";>Semanas 3 e 4 </p></strong>
+<strong><p>Semanas 3 e 4 </p></strong>
 
 Adicionar segurança na API: com a implementação de um mecanismo de autenticação, além  o deploy dela em algum provedor<br><br><br>
 

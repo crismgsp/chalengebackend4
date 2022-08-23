@@ -1,41 +1,45 @@
 <h1 align="center"><strong>Challenge Backend4 Alura :heart: </strong></h1><br>
 
 <strong>Resumo do que foi proposto para este Chalenge:</strong><br><br>
-<p style="color: red";>Semana 1  </p>
+<strong><p style="color: #ED30CF";>Semana 1  </p></strong>
 Implementar uma API REST: implementar nela o CRUD de receitas e de despesas, seguindo algumas validações e regras de negócio,
 implementar rotas para que sejam feitas requisicções HTTP, usar o Postman para testar estas requisições
 Não pode repetir a mesma descrição de despesa e receita para o mesmo mês/ano, caso o usuário tente fazer isso,
 é feita uma checagem e é devolvida uma mensagem avisando que isto não é permitido, e o post não é efetivado.
 <br><br>
 
-<p style="color: red";>Semana 2 </p>
+<strong><p style="color: #ED30CF";>Semana 2 </p></strong>
 Realizar ajustes na API: para permitir a categorização de despesas, além de implementar novas funcionalidades, como a busca de receitas e despesas pela descrição. Tambem é para fazer testes automatizados. <br><br>
 
-<p style="color: red";>Semanas 3 e 4 </p>
+<strong><p style="color: #ED30CF";>Semanas 3 e 4 </p></strong>
 
 Adicionar segurança na API: com a implementação de um mecanismo de autenticação, além  o deploy dela em algum provedor<br><br><br>
 
-Criei o projeto usando o framework <strong>Symfony</strong>, e o gerenciador Doctrine para fazer o mapeamento de objetos para o banco de dados, facilitando a conexão e consultas com o banco. Implementei as rotas, e em cada uma delas está definida qual requisição pode ser feita. <br> <br>
 
 <p align="center"><strong>O que já fiz até hoje (inicio da quarta e ultima semana):</strong></p>
 
-<p>Criei as rotas pedidas, com as regras pedidas, criei a rota onde saem as despesas categorizadas, implementei a autenticação, tem uma rota que fica escondida, que cria o usuario, depois este usuario insere o nome e senha na rota de login, e é devolvido um token, que ele insere na aba Authorization, type: Bearer Token do Postman (não testei mas deve ser similar em outro programa também), após inserir este token ele consegue acessar as demais rotas, a rota de login é a única que não exige que este token esteja inserido.
+Criei o projeto usando o framework <strong>Symfony</strong>, e o gerenciador Doctrine para fazer o mapeamento de objetos para o banco de dados, facilitando a conexão e consultas com o banco. Implementei as rotas, e em cada uma delas está definida qual requisição pode ser feita. <br> <br>
+
+<p>Criei as rotas pedidas, com as regras pedidas, criei a rota onde saem as despesas categorizadas, implementei a autenticação, tem uma rota que fica escondida, que cria o usuario, depois este usuario insere o nome e senha na rota de login, e é devolvido um token, que ele insere na aba Authorization, type: Bearer Token do Postman (não testei em outro programa mas deve ser parecido com o Postman), após inserir este token ele consegue acessar as demais rotas, a rota de login é a única que não exige que este token esteja inserido.
  Está feito o deploy, agora só falta estudar melhor a parte que tive mais dificuldade que foi a do testes automatizados para tentar implementa-los, por enquanto fiz os testes manualmente e e está tudo funcionando conforme o pedido</p>
 
-<strong>Banco de dados:</strong> Criei banco de dados com 2 tabelas, uma pra armazenar as informações das despesas e outro para 
-as despesas<br>
+<strong>Banco de dados:</strong> Criei banco de dados com 3 tabelas, uma pra armazenar as informações das despesas, outra para 
+as despesas e mais uma para armazenar usuário e senha para autenticação.<br>
 
 
 <strong>Criei as rotas pedidas que são estas abaixo:</strong> <br><br>
-OBS: irei tentar melhorar estas urls...consequentemente melhorando as rotas...<br><br>
+OBS: irei tentar melhorar estas urls...consequentemente deixando as rotas melhores e mais curtas...<br><br>
 <strong>Rota de login</strong>: <br>
 @Route("/login", name="app_login")<br>
 https://apicontrolefinanceiro.crismgsp.com/controlefinanceiro/public/index.php/login<br>
 Nesta rota o usuario insere os dados assim: <br>
+<pre>
 {    
   </t>  "usuario": "nomeusuario",<br>
   </t>  "senha" : "123456"<br>
-}<br>
+}
+</pre>
+<br>
 E envia um post, na resposta é retornado o token que ele irá inserir na autorização.<br><br>
 
 

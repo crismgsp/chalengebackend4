@@ -2,17 +2,22 @@
 
 namespace App\Tests\Service;
 
+require 'vendor/autoload.php';
+
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use PHPUnit\Framework\TestCase;
 use App\Controller\DespesasController;
 use App\Entity\Despesas;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use GuzzleHttp\Client;
+
 
 //testa se está inserindo o Post feito e se não insere a mesma descrição para o mesmo mes/ano
 
-class DespesasTest extends WebTestCase
+class DespesasTest extends TestCase
 
 {
 
@@ -24,6 +29,8 @@ class DespesasTest extends WebTestCase
     private Request $request;
 
     private $dados;
+
+   
         
 
     public function __construct(EntityManagerInterface $entityManager)
@@ -34,34 +41,51 @@ class DespesasTest extends WebTestCase
 
     public function testPost()
     {
-        $data = '09/08/2022';
+        $client = new Client('http://localhost:8000', array('request.options' => array('exceptions' => false,)));
+            $data = '02/01/2012';
 
-        $mesano = substr($data, 3 ,8);
+            $data2 = '10/01/2012';
 
-        $dados = array('descricao' => 'supermercado Teste', 'valor' => 210, 
-        'mesano' => $mesano, 'categoria' => 'alimentação', 'data' => $data);
-        
-        $request = json_encode($dados);
+            //mesano sera o mesmo para todas datas pois todas insercoes do teste serão do mesmo mes
+            $mesano = substr($data, 3 ,8);
+    
+            $dados = array('descricao' => 'supermercado', 'valor' => 210, 
+            'mesano' => $mesano, 'categoria' => 'alimentação', 'data' => $data);
 
-        $iniciar = curl_init("http://apicontrolefinanceiro.crismgsp.com/controlefinanceiro/public/index.php/despesas");
-		curl_setopt($iniciar, CURLOPT_RETURNTRANSFER, true );
-				
-							
-		curl_setopt($iniciar, CURLOPT_POST, true);
-				
-		curl_setopt($iniciar, CURLOPT_POSTFIELDS, $request);
-				
-		curl_exec($iniciar);
-				
-		curl_close($iniciar);
+            //vai tentar inserir a despesa com a mesma descrição para o mesmo mes...nao é para permitir
+            $dados2 = array('descricao' => 'supermercado', 'valor' => 210, 
+            'mesano' => $mesano, 'categoria' => 'alimentação', 'data' => $data2);
 
-        $this->importaDadosBd();
+            //vai inserir uma outra despesa no mesmo mes
+            $dados3 = array('descricao' => 'papelaria', 'valor' => 500, 
+            'mesano' => $mesano, 'categoria' => 'educação', 'data' => $data2);
+            //inserir uma terceira despesa diferente no mesmo mes
+            $dados4 = array('descricao' => 'mercearia', 'valor' => 43, 
+            'mesano' => $mesano, 'categoria' => 'alimentação', 'data' => $data);
 
-        
+            //envio dados 1
+            $request = $client->post('http://apicontrolefinanceiro.crismgsp.com/controlefinanceiro/public/index.php/despesas', null,
+            json_encode($dados));
+            $response = $request->send();
+            //tentativa de envio de dado com descricao repetida para mesmo mes
+            $request = $client->post('http://apicontrolefinanceiro.crismgsp.com/controlefinanceiro/public/index.php/despesas', null,
+            json_encode($dados2));
+            $response = $request->send();
+            //envio de segunda despesa diferente
+            $request = $client->post('http://apicontrolefinanceiro.crismgsp.com/controlefinanceiro/public/index.php/despesas', null,
+            json_encode($dados3));
+            $response = $request->send();
+            //envio de terceira despesa diferente
+            $request = $client->post('http://apicontrolefinanceiro.crismgsp.com/controlefinanceiro/public/index.php/despesas', null,
+            json_encode($dados4));
+            $response = $request->send();
 
+            
 
-
-    } 
+            
+    }
+   
+    
 
    public function testDespesas()
    {

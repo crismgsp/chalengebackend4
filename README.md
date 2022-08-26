@@ -18,7 +18,7 @@ Adicionar segurança na API: com a implementação de um mecanismo de autentica�
 
 <p align="center"><strong>O que já fiz até hoje (quase final da ultima semana):</strong></p>
 
-(Obs: irei dar uma pausa de 1 semana neste projeto para me dedicar ao curso de tecnologo, estou em semana de prova, logo que passar a prova e eu terminar as aulas da proxima semana...volto a estudar a parte de testes automatizados e tento implementar no projeto...em seguida preciso fazer umas refatoração também, pois tem muita coisa repetida)<br><br>
+(Obs: irei dar uma pausa de 1 semana neste projeto para me dedicar ao curso de tecnologo, estou em semana de prova, logo que passar a prova e eu terminar as aulas da proxima semana...volto a estudar a parte de testes automatizados e tento implementar no projeto...em seguida preciso fazer uma refatoração também, pois tem muita coisa repetida)<br><br>
 
 Criei o projeto usando o framework <strong>Symfony</strong>, e o gerenciador Doctrine para fazer o mapeamento de objetos para o banco de dados, facilitando a conexão e consultas com o banco. Implementei as rotas, e em cada uma delas está definida qual requisição pode ser feita. <br> <br>
 

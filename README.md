@@ -16,12 +16,13 @@ Realizar ajustes na API: para permitir a categorização de despesas, além de i
 Adicionar segurança na API: com a implementação de um mecanismo de autenticação, além  o deploy dela em algum provedor<br><br><br>
 
 
-<p align="center"><strong>O que já fiz até hoje (inicio da quarta e ultima semana):</strong></p>
+<p align="center"><strong>O que já fiz até hoje (quase final da ultima semana):</strong></p>
 
 Criei o projeto usando o framework <strong>Symfony</strong>, e o gerenciador Doctrine para fazer o mapeamento de objetos para o banco de dados, facilitando a conexão e consultas com o banco. Implementei as rotas, e em cada uma delas está definida qual requisição pode ser feita. <br> <br>
 
 <p>Criei as rotas pedidas, com as regras pedidas, criei a rota onde saem as despesas categorizadas, implementei a autenticação, tem uma rota que fica escondida, que cria o usuario, depois este usuario insere o nome e senha na rota de login, e é devolvido um token, que ele insere na aba Authorization, type: Bearer Token do Postman (não testei em outro programa mas deve ser parecido com o Postman), após inserir este token ele consegue acessar as demais rotas, a rota de login é a única que não exige que este token esteja inserido.
- Está feito o deploy, agora só falta estudar melhor a parte que tive mais dificuldade que foi a do testes automatizados para tentar implementa-los, por enquanto fiz os testes manualmente e e está tudo funcionando conforme o pedido</p>
+ Está feito o deploy, agora só falta estudar melhor a parte dos testes automatizados para tentar implementa-los, por enquanto fiz os testes manualmente e e está tudo funcionando conforme o pedido.</p>
+ </strong>Obs: irei dar uma pausa de 1 semana neste projeto para me dedicar ao curso de tecnologo, estou em semana de provas, logo que passar a prova e eu ajeitar tudo la...volto a estudar a parte de testes automatizados e tento implementar no projeto...em seguida preciso fazer umas refatorações tambem</strong><br>
 
 <strong>Banco de dados:</strong> Criei banco de dados com 3 tabelas, uma pra armazenar as informações das despesas, outra para 
 as despesas e mais uma para armazenar usuário e senha para autenticação.<br>
@@ -33,14 +34,16 @@ OBS: irei tentar melhorar estas urls...consequentemente deixando as rotas melhor
 @Route("/login", name="app_login")<br>
 https://apicontrolefinanceiro.crismgsp.com/controlefinanceiro/public/index.php/login<br>
 Nesta rota o usuario insere os dados assim: <br>
+pode utilizar o usuario abaixo caso queira testar: <br>
 <pre>
 {    
-  </t>  "usuario": "nomeusuario",<br>
+  </t>  "usuario": "usuario",<br>
   </t>  "senha" : "123456"<br>
 }
 </pre>
 <br>
-E envia um post, na resposta é retornado o token que ele irá inserir na autorização.<br><br>
+E envia um post, na resposta é retornado o token que ele irá inserir na autorização, no postman, marcar opção bearer token<br><br>
+Apos inserir este token as requisicoes podem ser feitas:
 
 
 <strong>Receitas</strong>: <br>
@@ -48,6 +51,14 @@ E envia um post, na resposta é retornado o token que ele irá inserir na autori
  <strong>https://apicontrolefinanceiro.crismgsp.com/controlefinanceiro/public/index.php/receitas</strong> <br>
  Esta rota é para o usuário inserir uma receita, usando o método POST <br><br>
  <br>
+ Exemplo de post em receitas:<br>
+ <pre>
+{    
+        "descricao": "salario atualiza",
+        "valor": 2400,
+        "data": "08/07/2022"
+}
+</pre>
  
  @Route("/receitas", methods={"GET"})<br>
 <strong>https://apicontrolefinanceiro.crismgsp.com/controlefinanceiro/public/index.php/receitas</strong><br>
@@ -72,6 +83,15 @@ Nesta rota o usuario pode buscar todas as receitas de um mesmo mes(no mesmo ano)
  <strong>https://apicontrolefinanceiro.crismgsp.com/controlefinanceiro/public/index.php/despesas</strong> <br>
  Esta rota é para o usuário inserir uma despesa, usando o método POST <br><br>
  <br>
+ Exemplo de post em despesas:<br>
+ <pre>
+{    
+        "descricao": "padaria",
+        "valor": 12,
+        "categoria": "alimentação",
+        "data": "22/07/2022"
+}
+</pre>
  
  @Route("/despesas", methods={"GET"}), :<br>
 <strong>https://apicontrolefinanceiro.crismgsp.com/controlefinanceiro/public/index.php/despesas</strong> <br>

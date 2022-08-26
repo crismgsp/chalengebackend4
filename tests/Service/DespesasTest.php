@@ -9,10 +9,12 @@ use PHPUnit\Framework\TestCase;
 use App\Controller\DespesasController;
 use App\Entity\Despesas;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+//use Symfony\Component\HttpFoundation\Request;
+//use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\RequestOptions;
 
 
 //testa se está inserindo o Post feito e se não insere a mesma descrição para o mesmo mes/ano
@@ -21,10 +23,6 @@ class DespesasTest extends TestCase
 
 {
 
-    /**
-     * @var EntityManagerInterface
-     */
-    private $entityManager;
 
     private Request $request;
 
@@ -32,16 +30,10 @@ class DespesasTest extends TestCase
 
    
         
-
-    public function __construct(EntityManagerInterface $entityManager)
+    //inserindo informacoes que serão usadas em alguns testes...esta funcao sera passada depois com o dataprovider para alguns testes...
+    public function postando()
     {
-        $this->entityManager = $entityManager;
-        
-    } 
-
-    public function testPost()
-    {
-        $client = new Client('http://localhost:8000', array('request.options' => array('exceptions' => false,)));
+        $client = new Client(array('request.options' => array('exceptions' => false,)));
             $data = '02/01/2012';
 
             $data2 = '10/01/2012';

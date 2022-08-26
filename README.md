@@ -21,8 +21,9 @@ Adicionar segurança na API: com a implementação de um mecanismo de autentica�
 Criei o projeto usando o framework <strong>Symfony</strong>, e o gerenciador Doctrine para fazer o mapeamento de objetos para o banco de dados, facilitando a conexão e consultas com o banco. Implementei as rotas, e em cada uma delas está definida qual requisição pode ser feita. <br> <br>
 
 <p>Criei as rotas pedidas, com as regras pedidas, criei a rota onde saem as despesas categorizadas, implementei a autenticação, tem uma rota que fica escondida, que cria o usuario, depois este usuario insere o nome e senha na rota de login, e é devolvido um token, que ele insere na aba Authorization, type: Bearer Token do Postman (não testei em outro programa mas deve ser parecido com o Postman), após inserir este token ele consegue acessar as demais rotas, a rota de login é a única que não exige que este token esteja inserido.
- Está feito o deploy, agora só falta estudar melhor a parte dos testes automatizados para tentar implementa-los, por enquanto fiz os testes manualmente e e está tudo funcionando conforme o pedido.</p>
- </strong>Obs: irei dar uma pausa de 1 semana neste projeto para me dedicar ao curso de tecnologo, estou em semana de provas, logo que passar a prova e eu ajeitar tudo la...volto a estudar a parte de testes automatizados e tento implementar no projeto...em seguida preciso fazer umas refatorações tambem</strong><br>
+ Está feito o deploy, agora só falta estudar melhor a parte dos testes automatizados para tentar implementa-los, por enquanto fiz os testes manualmente e e está tudo funcionando conforme o pedido.</p><br><br>
+
+Obs: irei dar uma pausa de 1 semana neste projeto para me dedicar ao curso de tecnologo, estou em semana de provas, logo que passar a prova e eu ajeitar tudo la...volto a estudar a parte de testes automatizados e tento implementar no projeto...em seguida preciso fazer umas refatorações tambem<br><br>
 
 <strong>Banco de dados:</strong> Criei banco de dados com 3 tabelas, uma pra armazenar as informações das despesas, outra para 
 as despesas e mais uma para armazenar usuário e senha para autenticação.<br>
@@ -68,6 +69,14 @@ Esta rota é para o usuário buscar informações de todas receitas, usando o m�
 <strong>https://apicontrolefinanceiro.crismgsp.com/controlefinanceiro/public/index.php/receitas/id</strong> <br>
 Esta rota é para o usuário buscar informações de uma receita, passando o seu id e usando o método GET<br><br>
 
+@Route("/receitas/{id}", methods={"PUT"}):<br>
+<strong>https://apicontrolefinanceiro.crismgsp.com/controlefinanceiro/public/index.php/receitas/id</strong> <br>
+Esta rota é para o usuário atualizar informações de uma receita, passando o seu id e usando o método PUT<br><br>
+
+@Route("/receitas/{id}", methods={"DELETE"}):<br>
+<strong>https://apicontrolefinanceiro.crismgsp.com/controlefinanceiro/public/index.php/receitas/id</strong> <br>
+Esta rota é para o usuário deletar informações de uma receita, passando o seu id e usando o método DELETE<br><br>
+
 @Route("/receitas/descricao/{descricao}", methods={"GET"})<br>
 <strong>https://apicontrolefinanceiro.crismgsp.com/controlefinanceiro/public/index.php/receitas/descricao/salario</strong> <br>
 Nesta rota o usuario pode buscar todas as receitas de acordo com uma descrição passada na url, e usando o GET<br><br>
@@ -100,6 +109,14 @@ Esta rota é para o usuário buscar informações de todas despesas, usando o m�
 @Route("/despesas/{id}", methods={"GET"}),  abaixo segue um exemplo:<br>
 <strong>https://apicontrolefinanceiro.crismgsp.com/controlefinanceiro/public/index.php/despesas/id</strong> <br>
 Esta rota é para o usuário buscar informações de uma despesa, passando o seu id e usando o método GET<br><br>
+
+@Route("/despesas/{id}", methods={"PUT"}),  abaixo segue um exemplo:<br>
+<strong>https://apicontrolefinanceiro.crismgsp.com/controlefinanceiro/public/index.php/despesas/id</strong> <br>
+Esta rota é para o usuário atualizar informações de uma despesa, passando o seu id e usando o método PUT<br><br>
+
+@Route("/despesas/{id}", methods={"DELETE"}),  abaixo segue um exemplo:<br>
+<strong>https://apicontrolefinanceiro.crismgsp.com/controlefinanceiro/public/index.php/despesas/id</strong> <br>
+Esta rota é para o usuário deletar informações de uma despesa, passando o seu id e usando o método DELETE<br><br>
 
 @Route("/despesas/descricao/{descricao}", methods={"GET"}), abaixo segue um exemplo:<br>
 <strong>https://apicontrolefinanceiro.crismgsp.com/controlefinanceiro/public/index.php/despesas/descricao/papelaria</strong> <br>

@@ -13,7 +13,9 @@ use Doctrine\ORM\EntityManagerInterface;
 //use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
 
 
@@ -23,17 +25,18 @@ class DespesasTest extends TestCase
 
 {
 
+    public function __construct(ClientInterface $httpClient)
+    {
+        $this->httpClient = $httpClient;
+        
+    }
 
-    private Request $request;
-
-    private $dados;
-
-   
+     
         
     //inserindo informacoes que serão usadas em alguns testes...esta funcao sera passada depois com o dataprovider para alguns testes...
     public function postando()
     {
-        $client = new Client(array('request.options' => array('exceptions' => false,)));
+            $client = new Client(array(['http://apicontrolefinanceiro.crismgsp.com/controlefinanceiro/public/index.php', 'request.options' => array('exceptions' => false,)]));
             $data = '02/01/2012';
 
             $data2 = '10/01/2012';
@@ -56,7 +59,18 @@ class DespesasTest extends TestCase
             'mesano' => $mesano, 'categoria' => 'alimentação', 'data' => $data);
 
             //envio dados 1
-            $request = $client->post('http://apicontrolefinanceiro.crismgsp.com/controlefinanceiro/public/index.php/despesas', null,
+            
+            //banco de dados de teste
+            
+            
+            $request = $this->httpClient->request('POST', 'http://apicontrolefinanceiro.crismgsp.com/controlefinanceiro/public/index.php/despesas', json_encode($dados) );
+            $request = $this->httpClient->request('POST', 'http://apicontrolefinanceiro.crismgsp.com/controlefinanceiro/public/index.php/despesas', json_encode($dados2) );
+            $request = $this->httpClient->request('POST', 'http://apicontrolefinanceiro.crismgsp.com/controlefinanceiro/public/index.php/despesas', json_encode($dados3) );
+            $request = $this->httpClient->request('POST', 'http://apicontrolefinanceiro.crismgsp.com/controlefinanceiro/public/index.php/despesas', json_encode($dados4) );
+            
+            $response = $client->send($request);
+            
+            /*$request = $client->post('http://apicontrolefinanceiro.crismgsp.com/controlefinanceiro/public/index.php/despesas', null,
             json_encode($dados));
             $response = $request->send();
             //tentativa de envio de dado com descricao repetida para mesmo mes
@@ -70,7 +84,7 @@ class DespesasTest extends TestCase
             //envio de terceira despesa diferente
             $request = $client->post('http://apicontrolefinanceiro.crismgsp.com/controlefinanceiro/public/index.php/despesas', null,
             json_encode($dados4));
-            $response = $request->send();
+            $response = $request->send(); */
 
             
 

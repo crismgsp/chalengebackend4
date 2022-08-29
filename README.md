@@ -16,9 +16,10 @@ Realizar ajustes na API: para permitir a categorização de despesas, além de i
 Adicionar segurança na API: com a implementação de um mecanismo de autenticação, além  o deploy dela em algum provedor<br><br><br>
 
 
-<p align="center"><strong>O que já fiz até hoje (quase final da ultima semana):</strong></p>
+<p align="center"><strong>O que já fiz até hoje (4 semanas):</strong></p>
 
-(Obs: irei dar uma pausa de 1 semana neste projeto para me dedicar ao curso de tecnologo, estou em semana de prova, logo que passar a prova e eu terminar as aulas da proxima semana...volto a estudar a parte de testes automatizados e tento implementar no projeto...em seguida preciso fazer uma refatoração também, pois tem muita coisa repetida)<br><br>
+(Dei uma pausa de 4 dias neste projeto, pois estava aprendendo muita coisa ao mesmo tempo, e fui fazer uma prova do curso de tecnologo, 
+agora que passou a correria, voltei para este projeto e estou assistindo um curso mais especifico de teste de api para tentar desenvolver a parte de testes automatizados, que é o que ficou faltando), logo que terminar voltarei a tentar implementar os testes automatizados<br><br>
 
 Criei o projeto usando o framework <strong>Symfony</strong>, e o gerenciador Doctrine para fazer o mapeamento de objetos para o banco de dados, facilitando a conexão e consultas com o banco. Implementei as rotas, e em cada uma delas está definida qual requisição pode ser feita. <br> <br>
 

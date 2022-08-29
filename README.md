@@ -26,7 +26,7 @@ Criei o projeto usando o framework <strong>Symfony</strong>, e o gerenciador Doc
 <p>Criei as rotas pedidas, com as regras pedidas, criei a rota onde saem as despesas categorizadas, implementei a autenticação, tem uma rota que fica escondida, que cria o usuario, depois este usuario insere o nome e senha na rota de login, e é devolvido um token, que ele insere na aba Authorization, type: Bearer Token do Postman (não testei em outro programa mas deve ser parecido com o Postman), após inserir este token ele consegue acessar as demais rotas, a rota de login é a única que não exige que este token esteja inserido.
  Está feito o deploy, agora só falta estudar melhor a parte dos testes automatizados para tentar implementa-los, por enquanto fiz os testes manualmente e e está tudo funcionando conforme o pedido.</p><br><br>
 
-<strong>Banco de dados:</strong> Criei banco de dados com 3 tabelas, uma pra armazenar as informações das despesas, outra para 
+<strong>Banco de dados:</strong> Criei banco de dados com 3 tabelas, uma pra armazenar as informações das receitas, outra para 
 as despesas e mais uma para armazenar usuário e senha para autenticação.<br>
 
 

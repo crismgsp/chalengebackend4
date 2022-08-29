@@ -177,7 +177,7 @@ class DespesasController extends AbstractController
             return new JsonResponse($despesaEnviada);
     
         }else{
-            $else = "Ja tem esta descricao de despesa inserida neste mes";
+            $else = "Atualização não feita, pois já tem uma despesa inserida com esta descrição neste mês, não pode repetir";
             return new JsonResponse($else);
         }       
         

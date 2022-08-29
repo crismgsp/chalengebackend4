@@ -61,10 +61,11 @@ class ReceitasController extends AbstractController
             $this->entityManager->flush();
     
             //agora retorna novamente no formato json para testar
+            
             return new JsonResponse($receita);
 
         }else{
-            $else = "Ja tem esta descricao de receita inserida neste mes";
+            $else = "Ja tem esta descricao de receita inserida neste mes, não pode repetir";
             return new JsonResponse($else);
         }
          
@@ -176,7 +177,7 @@ class ReceitasController extends AbstractController
     
 
         }else{
-            $erroatualiza = "Esta atualização nao foi feita";
+            $erroatualiza = "Atualização não feita, pois já tem uma receita inserida com esta descrição neste mês, não pode repetir";
             return new JsonResponse($erroatualiza);
         }     
         

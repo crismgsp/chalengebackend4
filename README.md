@@ -18,8 +18,7 @@ Adicionar segurança na API: com a implementação de um mecanismo de autentica�
 
 <p align="center"><strong>O que já fiz até hoje (4 semanas):</strong></p>
 
-(Dei uma pausa de 4 dias neste projeto, pois estava aprendendo muita coisa ao mesmo tempo, e fui fazer uma prova do curso de tecnologo, 
-agora que passou a correria, voltei para este projeto e estou assistindo um curso mais especifico de teste de api para tentar desenvolver a parte de testes automatizados, que é o que ficou faltando), logo que terminar voltarei a tentar implementar os testes automatizados<br><br>
+Fiz tudo o que foi pedido, só falta realizar os testes automatizados, estou estudando sobre isto para poder fazer<br><br>
 
 Criei o projeto usando o framework <strong>Symfony</strong>, e o gerenciador Doctrine para fazer o mapeamento de objetos para o banco de dados, facilitando a conexão e consultas com o banco. Implementei as rotas, e em cada uma delas está definida qual requisição pode ser feita. <br> <br>
 
@@ -158,9 +157,12 @@ Categoria  outras   -> Valor: 30<br>
 <p><img src='src/assets/imagens/symfony.png' alt="simbolo XAMPP"/> Symfony <br> </p>
 <p><img src='src/assets/imagens/doctrine.png' alt="simbolo XAMPP"/> Doctrine<br> </p>
 <p><img src='src/assets/imagens/postman.png' alt="simbolo XAMPP"/> Postman<br> </p>
+<br>
 
-
-
+<strong>O que aprendi participando deste projeto</strong><br><br>
+Aprendi a usar um framework, e ainda conheço pouco sobre o symfony, então ao mesmo tempo que ele me trouxe facilidade e velocidade pra fazer o projeto,
+quando dá algum erro eu demoro um pouco mais, até descobrir pois desta vez não fiz tudo do zero, tem muita coisa pronta que vem ao instalar o framework,
+e tive alguns problemas de comandos e partes do pacote que estão depreciadas, então posteriormente pretendo instalar desde o início em uma versão mais recente e atualizar alguns comandos, como estou fazendo para poder acompanhar o curso que ensina sobre testes automatizados. Mas foi um aprendizado muito interessante, inclusive aprendi bastante com os diversos erros que apareceram, se tivesse dado tudo certo apenas assistindo às aulas e adaptando para o projeto, não teria aprendido o mesmo tanto.
 
 
 

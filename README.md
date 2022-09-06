@@ -160,14 +160,14 @@ Categoria  outras   -> Valor: 30<br>
 <br>
 
 <strong>O que aprendi participando deste projeto</strong><br><br>
-Aprendi a usar um framework, e ainda conheço pouco sobre o symfony, então ao mesmo tempo que ele me trouxe facilidade e velocidade pra fazer o projeto,
-quando dá algum erro eu demoro um pouco mais, até descobrir pois desta vez não fiz tudo do zero, tem muita coisa pronta que vem ao instalar o framework,
+Aprendi a usar um framework, e ainda conheço pouco sobre o symfony, então ao mesmo tempo em que ele me trouxe facilidade e velocidade pra fazer o projeto,
+quando ocorre algum erro é mais demorado até descobrir pois desta vez não fiz tudo do zero, tem muita coisa pronta que vem ao instalar o framework, muitos arquivos, 
 e tive alguns problemas de comandos e partes do pacote que estão depreciadas, então posteriormente pretendo instalar desde o início em uma versão mais recente e atualizar alguns comandos, como estou fazendo para poder acompanhar o curso que ensina sobre testes automatizados. Mas foi um aprendizado muito interessante, inclusive aprendi bastante com os diversos erros que apareceram, se tivesse dado tudo certo apenas assistindo às aulas e adaptando para o projeto, não teria aprendido o mesmo tanto.
+<br<br>
 
 
 
-
-<p>Referencias das imagens para credito:</p>
+<strong><p>Referencias das imagens para credito:</p></strong>
 PHP -> https://www.flaticon.com/br/icones-gratis/php
 
 <br>

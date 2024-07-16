@@ -90,7 +90,9 @@ Nesta rota o usuario pode buscar todas as receitas de um mesmo mes(no mesmo ano)
 <strong>Despesas</strong>: <br>
 @Route("/despesas", methods={"POST"} :<br>
  <strong>https://apicontrolefinanceiro.crismgsp.com/controlefinanceiro/public/index.php/despesas</strong> <br>
- Esta rota é para o usuário inserir uma despesa, usando o método POST <br><br>
+ Esta rota é para o usuário inserir uma despesa, usando o método POST <br>
+ As categorias possíveis para inserir são: alimentação, saúde, moradia, transporte, educação, lazer e imprevistos, caso seja inserida outra categoria
+ ou uma destas com nome errado será atribuída a categoria outras.<br>
  <br>
  Exemplo de post em despesas:<br>
  <pre>

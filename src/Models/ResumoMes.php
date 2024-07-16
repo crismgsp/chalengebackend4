@@ -64,7 +64,8 @@ class ResumoMes
         $qb = $repositorioDeDespesas->createQueryBuilder('q');
         $query = $qb 
             ->select('q.categoria, SUM(q.valor), q.mesano')
-            ->groupBy('q.categoria')
+			//fiz uma alteração aqui pois fui testar o resumo e estava vindo incompleto
+            ->groupBy('q.categoria', 'q.mesano')
             ->getQuery()->getResult();
 
         $valoresDespesas = [];

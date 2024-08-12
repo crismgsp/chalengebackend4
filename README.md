@@ -35,11 +35,11 @@ OBS: irei tentar melhorar estas urls...consequentemente deixando as rotas melhor
 @Route("/login", name="app_login")<br>
 https://apicontrolefinanceiro.crismgsp.com/controlefinanceiro/public/index.php/login<br>
 Nesta rota o usuario insere os dados assim: <br>
-pode utilizar o usuario abaixo caso queira testar: <br>
+caso queira testar entre em contato para saber o usuário: <br>
 <pre>
 {    
-  </t>  "usuario": "usuario",<br>
-  </t>  "senha" : "123456"<br>
+  </t>  "usuario": "xxxxx",<br>
+  </t>  "senha" : "xxxxxx"<br>
 }
 </pre>
 <br>
